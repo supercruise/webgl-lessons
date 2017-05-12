@@ -1,12 +1,11 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; Mandelbrot shader on a spinning cube</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
-<script type="text/javascript" src="webgl-utils.js"></script>
 
+<script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="color-shader-fs" type="x-shader/x-fragment">
   precision mediump float;
@@ -18,7 +17,6 @@
   }
 </script>
 
-
 <script id="color-shader-vs" type="x-shader/x-vertex">
   attribute vec3 aVertexPosition;
   attribute vec4 aColor;
@@ -28,14 +26,11 @@
 
   varying vec4 vColor;
 
-
   void main(void) {
     gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
     vColor = aColor;
   }
 </script>
-
-
 
 <script id="mandelbrot-shader-fs" type="x-shader/x-fragment">
   precision mediump float;
@@ -57,12 +52,12 @@
     float q;
     float t;
 
-
     float x = 0.0;
     float y = 0.0;
     float tempX = 0.0;
     int i = 0;
     int runaway = 0;
+
     for (int i=0; i < 100; i++) {
       tempX = x * x - y * y + float(cx);
       y = 2.0 * x * y + float(cy);
@@ -112,17 +107,16 @@
 
   varying vec2 vPlotPosition;
 
-
   void main(void) {
     gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
     vPlotPosition = aPlotPosition;
   }
 </script>
 
-
 <script type="text/javascript">
 
   var gl;
+
   function initGL(canvas) {
     try {
       gl = canvas.getContext("experimental-webgl");
@@ -134,7 +128,6 @@
       alert("Could not initialise WebGL, sorry :-(");
     }
   }
-
 
   function getShader(gl, id) {
     var shaderScript = document.getElementById(id);
@@ -171,7 +164,6 @@
     return shader;
   }
 
-
   function initProgram(fragmentShaderName, vertexShaderName) {
     var fragmentShader = getShader(gl, fragmentShaderName);
     var vertexShader = getShader(gl, vertexShaderName);
@@ -194,9 +186,9 @@
     return program;
   }
 
-
   var colorProgram;
   var mandelbrotProgram;
+
   function initPrograms() {
     colorProgram = initProgram("color-shader-fs", "color-shader-vs");
     colorProgram.vertexColorAttribute = gl.getAttribLocation(colorProgram, "aColor");
@@ -207,13 +199,12 @@
     gl.enableVertexAttribArray(mandelbrotProgram.vertexPlotPositionAttribute);
   }
 
-
   var currentProgram;
+
   function setCurrentProgram(program) {
     currentProgram = program;
     gl.useProgram(program);
   }
-
 
   var mvMatrix = mat4.create();
   var mvMatrixStack = [];
@@ -232,19 +223,17 @@
     mvMatrix = mvMatrixStack.pop();
   }
 
-
   function setMatrixUniforms() {
     gl.uniformMatrix4fv(currentProgram.pMatrixUniform, false, pMatrix);
     gl.uniformMatrix4fv(currentProgram.mvMatrixUniform, false, mvMatrix);
   }
 
-
   function degToRad(degrees) {
     return degrees * Math.PI / 180;
   }
 
-
   var cubes = Array();
+
   function MandelbrotCube(xPos, yPos, zPos, xVel, yVel, zVel, xRot, yRot, zRot) {
     this.xPos = xPos;
     this.yPos = yPos;
@@ -266,7 +255,6 @@
     this.zoomCenterX = 0.28693186889504513;
     this.zoomCenterY = 0.014286693904085048;
   }
-
 
   MandelbrotCube.prototype.animate = function(elapsed) {
     this.xRot += (20 * elapsed) / 1000.0;
@@ -309,7 +297,6 @@
     }
   }
 
-
   MandelbrotCube.prototype.draw = function() {
     setCurrentProgram(mandelbrotProgram);
 
@@ -343,12 +330,12 @@
     gl.deleteBuffer(positionBuffer);
   }
 
-
   var boundingBoxVertexPositionBuffer;
   var boundingBoxVertexColorBuffer;
   var boundingBoxVertexIndexBuffer;
   var cubeVertexPositionBuffer;
   var cubeVertexIndexBuffer;
+
   function initBuffers() {
     boundingBoxVertexPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, boundingBoxVertexPositionBuffer);
@@ -485,7 +472,6 @@
     cubeVertexIndexBuffer.numItems = 36;
   }
 
-
   function drawScene() {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -510,8 +496,8 @@
     gl.drawElements(gl.TRIANGLES, boundingBoxVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
   }
 
-
   var lastTime = 0;
+
   function animate() {
     var timeNow = new Date().getTime();
     if (lastTime != 0) {
@@ -523,13 +509,11 @@
     lastTime = timeNow;
   }
 
-
   function tick() {
     requestAnimFrame(tick);
     drawScene();
     animate();
   }
-
 
   function webGLStart() {
     var canvas = document.getElementById("example02-canvas");
@@ -552,22 +536,14 @@
 
     tick();
   }
-
-
-
 </script>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-  <a href="http://learningwebgl.com/blog/?p=669">&lt;&lt; Back to the blog</a><br />
+  <a href="http://learningwebgl.com/blog/?p=669">&lt;&lt; Back to the blog</a><br/>
 
-  <canvas id="example02-canvas" style="border: none;" width="500" height="500"></canvas>
+  <canvas id="example02-canvas" style="border: none;" width="500" height="500"></canvas><br/>
 
-  <br/>
-  <a href="http://learningwebgl.com/blog/?p=669">&lt;&lt; Back to the blog</a><br />
+  <a href="http://learningwebgl.com/blog/?p=669">&lt;&lt; Back to the blog</a><br/>
 </body>
-
 </html>

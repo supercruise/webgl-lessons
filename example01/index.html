@@ -1,5 +1,4 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; Mandelbrot shader example</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -22,7 +21,6 @@
     float p;
     float q;
     float t;
-
 
     float x = 0.0;
     float y = 0.0;
@@ -81,10 +79,10 @@
   }
 </script>
 
-
 <script type="text/javascript">
 
   var gl;
+
   function initGL(canvas) {
     try {
       gl = canvas.getContext("experimental-webgl");
@@ -96,7 +94,6 @@
       alert("Could not initialise WebGL, sorry :-(");
     }
   }
-
 
   function getShader(gl, id) {
     var shaderScript = document.getElementById(id);
@@ -133,11 +130,10 @@
     return shader;
   }
 
-
   var shaderProgram;
   var aVertexPosition;
-  function initShaders() {
 
+  function initShaders() {
     var fragmentShader = getShader(gl, "shader-fs");
     var vertexShader = getShader(gl, "shader-vs");
 
@@ -159,7 +155,6 @@
     gl.enableVertexAttribArray(aPlotPosition);
   }
 
-
   var centerOffsetX = 0;
   var centerOffsetY = 0;
 
@@ -168,6 +163,7 @@
   var zoomCenterY;
 
   var vertexPositionBuffer;
+
   function initBuffers() {
     vertexPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
@@ -182,21 +178,19 @@
     vertexPositionBuffer.numItems = 4;
   }
 
-
-
   var baseCorners = [
       [ 0.7,  1.2],
       [-2.2,  1.2],
       [ 0.7, -1.2],
       [-2.2, -1.2],
   ];
+
   function drawScene() {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
     gl.vertexAttribPointer(aVertexPosition, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-
 
     var plotPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, plotPositionBuffer);
@@ -230,13 +224,11 @@
 
   }
 
-
   function resetZoom() {
     zoom = 1.0;
     zoomCenterX = parseFloat(document.getElementById("zoomCenterXInput").value);
     zoomCenterY = parseFloat(document.getElementById("zoomCenterYInput").value);
   }
-
 
   function webGLStart() {
     resetZoom();
@@ -250,17 +242,11 @@
 
     setInterval(drawScene, 15);
   }
-
-
-
 </script>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-  <a href="http://learningwebgl.com/blog/?p=205">&lt;&lt; Back to the blog</a><br />
+  <a href="http://learningwebgl.com/blog/?p=205">&lt;&lt; Back to the blog</a><br/>
 
   <canvas id="example01-canvas" style="border: none;" width="425" height="330"></canvas>
 
@@ -270,7 +256,6 @@
   Zoom target: <br />
   X <input type="text" id="zoomCenterXInput" value="0.28693186889504513" />
   Y <input type="text" id="zoomCenterYInput" value="0.014286693904085048" />
-
   <p>
   <input type="button" value="Reset Zoom" onClick="resetZoom()" />
   </form>
@@ -280,13 +265,11 @@
   <p>
   Current center: <br />
   X <input type="text" id="centerOffsetXOutput" /> Y <input type="text" id="centerOffsetYOutput" />
-
   <p>
   Zoom: <input type="text" id="zoomOutput" />
   </form>
 
   <br/>
-  <a href="http://learningwebgl.com/blog/?p=205">&lt;&lt; Back to the blog</a><br />
+  <a href="http://learningwebgl.com/blog/?p=205">&lt;&lt; Back to the blog</a><br/>
 </body>
-
 </html>
