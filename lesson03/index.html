@@ -1,5 +1,4 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 3</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -32,7 +31,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -48,7 +46,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -85,7 +82,6 @@
         return shader;
     }
 
-
     var shaderProgram;
 
     function initShaders() {
@@ -113,7 +109,6 @@
         shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
     }
 
-
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
     var pMatrix = mat4.create();
@@ -131,17 +126,14 @@
         mvMatrix = mvMatrixStack.pop();
     }
 
-
     function setMatrixUniforms() {
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
         gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
     }
 
-
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
 
     var triangleVertexPositionBuffer;
     var triangleVertexColorBuffer;
@@ -171,7 +163,6 @@
         triangleVertexColorBuffer.itemSize = 4;
         triangleVertexColorBuffer.numItems = 3;
 
-
         squareVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
         vertices = [
@@ -194,8 +185,6 @@
         squareVertexColorBuffer.itemSize = 4;
         squareVertexColorBuffer.numItems = 4;
     }
-
-
 
     var rTri = 0;
     var rSquare = 0;
@@ -223,7 +212,6 @@
         gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
         mvPopMatrix();
 
-
         mat4.translate(mvMatrix, [3.0, 0.0, 0.0]);
 
         mvPushMatrix();
@@ -241,7 +229,6 @@
         mvPopMatrix();
     }
 
-
     var lastTime = 0;
 
     function animate() {
@@ -255,13 +242,11 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         drawScene();
         animate();
     }
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson03-canvas");
@@ -274,19 +259,14 @@
 
         tick();
     }
-
 </script>
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=239">&lt;&lt; Back to Lesson 3</a><br />
+    <a href="http://learningwebgl.com/blog/?p=239">&lt;&lt; Back to Lesson 3</a><br/>
 
-    <canvas id="lesson03-canvas" style="border: none;" width="500" height="500"></canvas>
+    <canvas id="lesson03-canvas" style="border: none;" width="500" height="500"></canvas><br/>
 
-    <br/>
-    <a href="http://learningwebgl.com/blog/?p=239">&lt;&lt; Back to Lesson 3</a><br />
+    <a href="http://learningwebgl.com/blog/?p=239">&lt;&lt; Back to Lesson 3</a><br/>
 </body>
-
 </html>
