@@ -1,10 +1,10 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 11</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="shader-fs" type="x-shader/x-fragment">
@@ -54,7 +54,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -70,7 +69,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -106,7 +104,6 @@
 
         return shader;
     }
-
 
     var shaderProgram;
 
@@ -144,7 +141,6 @@
         shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirectionalColor");
     }
 
-
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -155,7 +151,6 @@
 
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var moonTexture;
 
@@ -168,7 +163,6 @@
 
         moonTexture.image.src = "moon.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -197,11 +191,9 @@
         gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
     }
 
-
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
 
     var mouseDown = false;
     var lastMouseX = null;
@@ -216,11 +208,9 @@
         lastMouseY = event.clientY;
     }
 
-
     function handleMouseUp(event) {
         mouseDown = false;
     }
-
 
     function handleMouseMove(event) {
         if (!mouseDown) {
@@ -242,8 +232,6 @@
         lastMouseX = newX
         lastMouseY = newY;
     }
-
-
 
     var moonVertexPositionBuffer;
     var moonVertexNormalBuffer;
@@ -325,7 +313,6 @@
         moonVertexIndexBuffer.numItems = indexData.length;
     }
 
-
     function drawScene() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -384,12 +371,10 @@
         gl.drawElements(gl.TRIANGLES, moonVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         drawScene();
     }
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson11-canvas");
@@ -407,15 +392,11 @@
 
         tick();
     }
-
 </script>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=1253">&lt;&lt; Back to Lesson 11</a><br />
+    <a href="http://learningwebgl.com/blog/?p=1253">&lt;&lt; Back to Lesson 11</a><br/>
 
     <canvas id="lesson11-canvas" style="border: none;" width="500" height="500"></canvas>
     <br/>
@@ -441,7 +422,6 @@
         </tr>
     </table>
 
-
     <h2>Ambient light:</h2>
 
     <table style="border: 0; padding: 10px;">
@@ -460,5 +440,4 @@
 
     <a href="http://learningwebgl.com/blog/?p=1253">&lt;&lt; Back to Lesson 11</a><br />
 </body>
-
 </html>

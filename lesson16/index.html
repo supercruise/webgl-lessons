@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="per-fragment-lighting-fs" type="x-shader/x-fragment">
@@ -30,7 +31,6 @@
     uniform vec3 uPointLightingSpecularColor;
 
     uniform sampler2D uSampler;
-
 
     void main(void) {
         vec3 ambientLightWeighting = uAmbientLightingColor;
@@ -94,7 +94,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -110,7 +109,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -146,7 +144,6 @@
 
         return shader;
     }
-
 
     var shaderProgram;
 
@@ -192,7 +189,6 @@
         shaderProgram.pointLightingDiffuseColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingDiffuseColor");
     }
 
-
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -203,7 +199,6 @@
 
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var moonTexture;
     var crateTexture;
@@ -223,7 +218,6 @@
         }
         crateTexture.image.src = "crate.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -256,7 +250,6 @@
         return degrees * Math.PI / 180;
     }
 
-
     var rttFramebuffer;
     var rttTexture;
 
@@ -285,7 +278,6 @@
         gl.bindRenderbuffer(gl.RENDERBUFFER, null);
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
-
 
     var cubeVertexPositionBuffer;
     var cubeVertexNormalBuffer;
@@ -445,7 +437,6 @@
         cubeVertexIndexBuffer.itemSize = 1;
         cubeVertexIndexBuffer.numItems = 36;
 
-
         var latitudeBands = 30;
         var longitudeBands = 30;
         var radius = 1;
@@ -519,7 +510,6 @@
         moonVertexIndexBuffer.itemSize = 1;
         moonVertexIndexBuffer.numItems = indexData.length;
 
-
         laptopScreenVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, laptopScreenVertexPositionBuffer);
         vertices = [
@@ -557,7 +547,6 @@
         laptopScreenVertexTextureCoordBuffer.numItems = 4;
     }
 
-
     var laptopVertexPositionBuffer;
     var laptopVertexNormalBuffer;
     var laptopVertexTextureCoordBuffer;
@@ -589,7 +578,6 @@
         laptopVertexIndexBuffer.numItems = laptopData.indices.length;
     }
 
-
     function loadLaptop() {
         var request = new XMLHttpRequest();
         request.open("GET", "macbook.json");
@@ -600,8 +588,6 @@
         }
         request.send();
     }
-
-
 
     var laptopScreenAspectRatio = 1.66;
 
@@ -654,7 +640,6 @@
         gl.drawElements(gl.TRIANGLES, moonVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         mvPopMatrix();
 
-
         mvPushMatrix();
         mat4.rotate(mvMatrix, degToRad(cubeAngle), [0, 1, 0]);
         mat4.translate(mvMatrix, [1.25, 0, 0]);
@@ -680,7 +665,6 @@
         gl.generateMipmap(gl.TEXTURE_2D);
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var laptopAngle = 0;
 
@@ -759,7 +743,6 @@
         mvPopMatrix();
     }
 
-
     var lastTime = 0;
 
     function animate() {
@@ -775,13 +758,11 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         drawScene();
         animate();
     }
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson16-canvas");
@@ -797,15 +778,11 @@
 
         tick();
     }
-
 </script>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=1786">&lt;&lt; Back to Lesson 16</a><br />
+    <a href="http://learningwebgl.com/blog/?p=1786">&lt;&lt; Back to Lesson 16</a><br/>
 
     <canvas id="lesson16-canvas" style="border: none;" width="500" height="500"></canvas>
     <br/>
@@ -817,5 +794,4 @@
 
     <a href="http://learningwebgl.com/blog/?p=1786">&lt;&lt; Back to Lesson 16</a><br />
 </body>
-
 </html>

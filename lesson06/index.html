@@ -1,10 +1,10 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 6</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="shader-fs" type="x-shader/x-fragment">
@@ -35,7 +35,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -51,7 +50,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -88,7 +86,6 @@
         return shader;
     }
 
-
     var shaderProgram;
 
     function initShaders() {
@@ -117,7 +114,6 @@
         shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     }
 
-
     function handleLoadedTexture(textures) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
@@ -140,7 +136,6 @@
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
 
-
     var crateTextures = Array();
 
     function initTexture() {
@@ -157,7 +152,6 @@
         }
         crateImage.src = "crate.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -176,17 +170,14 @@
         mvMatrix = mvMatrixStack.pop();
     }
 
-
     function setMatrixUniforms() {
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
         gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
     }
 
-
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
 
     var xRot = 0;
     var xSpeed = 0;
@@ -197,7 +188,6 @@
     var z = -5.0;
 
     var filter = 0;
-
 
     var currentlyPressedKeys = {};
 
@@ -212,11 +202,9 @@
         }
     }
 
-
     function handleKeyUp(event) {
         currentlyPressedKeys[event.keyCode] = false;
     }
-
 
     function handleKeys() {
         if (currentlyPressedKeys[33]) {
@@ -245,10 +233,10 @@
         }
     }
 
-
     var cubeVertexPositionBuffer;
     var cubeVertexTextureCoordBuffer;
     var cubeVertexIndexBuffer;
+
     function initBuffers() {
         cubeVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
@@ -351,7 +339,6 @@
         cubeVertexIndexBuffer.numItems = 36;
     }
 
-
     function drawScene() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -371,7 +358,6 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
         gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, crateTextures[filter]);
         gl.uniform1i(shaderProgram.samplerUniform, 0);
@@ -380,7 +366,6 @@
         setMatrixUniforms();
         gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     }
-
 
     var lastTime = 0;
 
@@ -395,15 +380,12 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         handleKeys();
         drawScene();
         animate();
     }
-
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson06-canvas");
@@ -420,12 +402,8 @@
 
         tick();
     }
-
 </script>
-
-
 </head>
-
 
 <body onload="webGLStart();">
     <a href="http://learningwebgl.com/blog/?p=571">&lt;&lt; Back to Lesson 6</a><br />
@@ -443,5 +421,4 @@
     <br/>
     <a href="http://learningwebgl.com/blog/?p=571">&lt;&lt; Back to Lesson 6</a><br />
 </body>
-
 </html>

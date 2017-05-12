@@ -1,5 +1,4 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 5</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -35,7 +34,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -51,7 +49,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -88,7 +85,6 @@
         return shader;
     }
 
-
     var shaderProgram;
 
     function initShaders() {
@@ -117,7 +113,6 @@
         shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     }
 
-
     function handleLoadedTexture(texture) {
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -126,7 +121,6 @@
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var neheTexture;
 
@@ -139,7 +133,6 @@
 
         neheTexture.image.src = "nehe.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -158,12 +151,10 @@
         mvMatrix = mvMatrixStack.pop();
     }
 
-
     function setMatrixUniforms() {
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
         gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
     }
-
 
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
@@ -275,7 +266,6 @@
         cubeVertexIndexBuffer.numItems = 36;
     }
 
-
     var xRot = 0;
     var yRot = 0;
     var zRot = 0;
@@ -309,7 +299,6 @@
         gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     }
 
-
     var lastTime = 0;
 
     function animate() {
@@ -324,13 +313,11 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         drawScene();
         animate();
     }
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson05-canvas");
@@ -344,21 +331,14 @@
 
         tick();
     }
-
-
 </script>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=507">&lt;&lt; Back to Lesson 5</a><br />
+    <a href="http://learningwebgl.com/blog/?p=507">&lt;&lt; Back to Lesson 5</a><br/>
 
-    <canvas id="lesson05-canvas" style="border: none;" width="500" height="500"></canvas>
+    <canvas id="lesson05-canvas" style="border: none;" width="500" height="500"></canvas><br/>
 
-    <br/>
-    <a href="http://learningwebgl.com/blog/?p=507">&lt;&lt; Back to Lesson 5</a><br />
+    <a href="http://learningwebgl.com/blog/?p=507">&lt;&lt; Back to Lesson 5</a><br/>
 </body>
-
 </html>

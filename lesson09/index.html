@@ -1,10 +1,10 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 9</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="shader-fs" type="x-shader/x-fragment">
@@ -37,7 +37,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -53,7 +52,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -90,7 +88,6 @@
         return shader;
     }
 
-
     var shaderProgram;
 
     function initShaders() {
@@ -120,7 +117,6 @@
         shaderProgram.colorUniform = gl.getUniformLocation(shaderProgram, "uColor");
     }
 
-
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -130,7 +126,6 @@
 
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var starTexture;
 
@@ -143,7 +138,6 @@
 
         starTexture.image.src = "star.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -162,17 +156,14 @@
         mvMatrix = mvMatrixStack.pop();
     }
 
-
     function setMatrixUniforms() {
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
         gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
     }
 
-
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
 
     var currentlyPressedKeys = {};
 
@@ -180,18 +171,13 @@
         currentlyPressedKeys[event.keyCode] = true;
     }
 
-
     function handleKeyUp(event) {
         currentlyPressedKeys[event.keyCode] = false;
     }
 
-
     var zoom = -15;
-
-
     var tilt = 90;
     var spin = 0;
-
 
     function handleKeys() {
         if (currentlyPressedKeys[33]) {
@@ -211,7 +197,6 @@
             tilt -= 2;
         }
     }
-
 
     var starVertexPositionBuffer;
     var starVertexTextureCoordBuffer;
@@ -242,7 +227,6 @@
         starVertexTextureCoordBuffer.numItems = 4;
     }
 
-
     function drawStar() {
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, starTexture);
@@ -257,8 +241,6 @@
         setMatrixUniforms();
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, starVertexPositionBuffer.numItems);
     }
-
-
 
     function Star(startingDistance, rotationSpeed) {
         this.angle = 0;
@@ -296,8 +278,8 @@
         mvPopMatrix();
     };
 
-
     var effectiveFPMS = 60 / 1000;
+
     Star.prototype.animate = function (elapsedTime) {
         this.angle += this.rotationSpeed * effectiveFPMS * elapsedTime;
 
@@ -308,9 +290,7 @@
             this.dist += 5.0;
             this.randomiseColors();
         }
-
     };
-
 
     Star.prototype.randomiseColors = function () {
         // Give the star a random color for normal
@@ -327,8 +307,6 @@
         this.twinkleB = Math.random();
     };
 
-
-
     var stars = [];
 
     function initWorldObjects() {
@@ -338,7 +316,6 @@
             stars.push(new Star((i / numStars) * 5.0, i / numStars));
         }
     }
-
 
     function drawScene() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -358,9 +335,7 @@
             stars[i].draw(tilt, spin, twinkle);
             spin += 0.1;
         }
-
     }
-
 
     var lastTime = 0;
 
@@ -374,9 +349,7 @@
             }
         }
         lastTime = timeNow;
-
     }
-
 
     function tick() {
         requestAnimFrame(tick);
@@ -384,8 +357,6 @@
         drawScene();
         animate();
     }
-
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson09-canvas");
@@ -402,15 +373,11 @@
 
         tick();
     }
-
 </script>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=1008">&lt;&lt; Back to Lesson 9</a><br />
+    <a href="http://learningwebgl.com/blog/?p=1008">&lt;&lt; Back to Lesson 9</a><br/>
 
     <canvas id="lesson09-canvas" style="border: none;" width="500" height="500"></canvas>
 
@@ -422,5 +389,4 @@
     <br/>
     <a href="http://learningwebgl.com/blog/?p=1008">&lt;&lt; Back to Lesson 9</a>
 </body>
-
 </html>

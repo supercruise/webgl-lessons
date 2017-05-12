@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="per-fragment-lighting-fs" type="x-shader/x-fragment">
@@ -27,7 +28,6 @@
     uniform vec3 uPointLightingDiffuseColor;
 
     uniform sampler2D uSampler;
-
 
     void main(void) {
         vec3 lightWeighting;
@@ -74,7 +74,6 @@
     varying vec3 vTransformedNormal;
     varying vec4 vPosition;
 
-
     void main(void) {
         vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
         gl_Position = uPMatrix * vPosition;
@@ -82,7 +81,6 @@
         vTransformedNormal = uNMatrix * aVertexNormal;
     }
 </script>
-
 
 <script type="text/javascript">
 
@@ -99,7 +97,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -135,7 +132,6 @@
 
         return shader;
     }
-
 
     var shaderProgram;
 
@@ -177,7 +173,6 @@
         shaderProgram.pointLightingDiffuseColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingDiffuseColor");
     }
 
-
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -188,7 +183,6 @@
 
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var earthTexture;
     var galvanizedTexture;
@@ -208,7 +202,6 @@
         }
         galvanizedTexture.image.src = "arroway.de_metal+structure+06_d100_flat.jpg";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -240,7 +233,6 @@
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
 
     var teapotVertexPositionBuffer;
     var teapotVertexNormalBuffer;
@@ -275,7 +267,6 @@
         document.getElementById("loadingtext").textContent = "";
     }
 
-
     function loadTeapot() {
         var request = new XMLHttpRequest();
         request.open("GET", "Teapot.json");
@@ -287,9 +278,7 @@
         request.send();
     }
 
-
     var teapotAngle = 180;
-
 
     function drawScene() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -369,7 +358,6 @@
         gl.drawElements(gl.TRIANGLES, teapotVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     }
 
-
     var lastTime = 0;
 
     function animate() {
@@ -382,13 +370,11 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         drawScene();
         animate();
     }
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson14-canvas");
@@ -402,9 +388,7 @@
 
         tick();
     }
-
 </script>
-
 
 <style type="text/css">
     #loadingtext {
@@ -415,13 +399,10 @@
         color: white;
     }
 </style>
-
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=1658">&lt;&lt; Back to Lesson 14</a><br />
+    <a href="http://learningwebgl.com/blog/?p=1658">&lt;&lt; Back to Lesson 14</a><br/>
 
     <canvas id="lesson14-canvas" style="border: none;" width="500" height="500"></canvas>
 
@@ -439,7 +420,6 @@
     </select>
     <br/>
 
-
     <h2>Material:</h2>
 
     <table style="border: 0; padding: 10px;">
@@ -448,7 +428,6 @@
             <td><input type="text" id="shininess" value="32.0" />
         </tr>
     </table>
-
 
     <h2>Point light:</h2>
 
@@ -473,7 +452,6 @@
         </tr>
     </table>
 
-
     <h2>Ambient light:</h2>
 
     <table style="border: 0; padding: 10px;">
@@ -491,5 +469,4 @@
 
     <a href="http://learningwebgl.com/blog/?p=1658">&lt;&lt; Back to Lesson 14</a><br />
 </body>
-
 </html>

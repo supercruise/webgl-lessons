@@ -1,10 +1,10 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 13</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="per-vertex-lighting-fs" type="x-shader/x-fragment">
@@ -63,7 +63,6 @@
         }
     }
 </script>
-
 
 <script id="per-fragment-lighting-fs" type="x-shader/x-fragment">
     precision mediump float;
@@ -126,7 +125,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -142,7 +140,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -179,8 +176,6 @@
         return shader;
     }
 
-
-
     function createProgram(fragmentShaderID, vertexShaderID) {
         var fragmentShader = getShader(gl, fragmentShaderID);
         var vertexShader = getShader(gl, vertexShaderID);
@@ -216,7 +211,6 @@
         return program;
     }
 
-
     var currentProgram;
     var perVertexProgram;
     var perFragmentProgram;
@@ -225,7 +219,6 @@
         perVertexProgram = createProgram("per-vertex-lighting-fs", "per-vertex-lighting-vs");
         perFragmentProgram = createProgram("per-fragment-lighting-fs", "per-fragment-lighting-vs");
     }
-
 
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -237,7 +230,6 @@
 
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var moonTexture;
     var crateTexture;
@@ -257,7 +249,6 @@
         }
         crateTexture.image.src = "crate.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -286,11 +277,9 @@
         gl.uniformMatrix3fv(currentProgram.nMatrixUniform, false, normalMatrix);
     }
 
-
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
 
     var cubeVertexPositionBuffer;
     var cubeVertexNormalBuffer;
@@ -301,6 +290,7 @@
     var moonVertexNormalBuffer;
     var moonVertexTextureCoordBuffer;
     var moonVertexIndexBuffer;
+
     function initBuffers() {
         cubeVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
@@ -445,7 +435,6 @@
         cubeVertexIndexBuffer.itemSize = 1;
         cubeVertexIndexBuffer.numItems = 36;
 
-
         var latitudeBands = 30;
         var longitudeBands = 30;
         var radius = 1;
@@ -520,7 +509,6 @@
         moonVertexIndexBuffer.numItems = indexData.length;
     }
 
-
     var moonAngle = 180;
     var cubeAngle = 0;
 
@@ -593,7 +581,6 @@
         gl.drawElements(gl.TRIANGLES, moonVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         mvPopMatrix();
 
-
         mvPushMatrix();
         mat4.rotate(mvMatrix, degToRad(cubeAngle), [0, 1, 0]);
         mat4.translate(mvMatrix, [1.25, 0, 0]);
@@ -616,7 +603,6 @@
         mvPopMatrix();
     }
 
-
     var lastTime = 0;
 
     function animate() {
@@ -630,13 +616,11 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         drawScene();
         animate();
     }
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson13-canvas");
@@ -650,12 +634,8 @@
 
         tick();
     }
-
 </script>
-
-
 </head>
-
 
 <body onload="webGLStart();">
     <a href="http://learningwebgl.com/blog/?p=1523">&lt;&lt; Back to Lesson 13</a><br />
@@ -696,7 +676,6 @@
         </tr>
     </table>
 
-
     <br/>
     Moon texture courtesy of <a href="http://maps.jpl.nasa.gov/">the Jet Propulsion Laboratory</a>.
     <br/>
@@ -704,5 +683,4 @@
 
     <a href="http://learningwebgl.com/blog/?p=1523">&lt;&lt; Back to Lesson 13</a><br />
 </body>
-
 </html>

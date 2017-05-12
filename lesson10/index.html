@@ -1,10 +1,10 @@
 <html>
-
 <head>
 <title>Learning WebGL &mdash; lesson 10</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
 <script type="text/javascript" src="webgl-utils.js"></script>
 
 <script id="shader-fs" type="x-shader/x-fragment">
@@ -34,7 +34,6 @@
     }
 </script>
 
-
 <script type="text/javascript">
 
     var gl;
@@ -50,7 +49,6 @@
             alert("Could not initialise WebGL, sorry :-(");
         }
     }
-
 
     function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
@@ -87,7 +85,6 @@
         return shader;
     }
 
-
     var shaderProgram;
 
     function initShaders() {
@@ -116,7 +113,6 @@
         shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     }
 
-
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -126,7 +122,6 @@
 
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
-
 
     var mudTexture;
 
@@ -139,7 +134,6 @@
 
         mudTexture.image.src = "mud.gif";
     }
-
 
     var mvMatrix = mat4.create();
     var mvMatrixStack = [];
@@ -158,18 +152,14 @@
         mvMatrix = mvMatrixStack.pop();
     }
 
-
     function setMatrixUniforms() {
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
         gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
     }
 
-
     function degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
-
 
     var currentlyPressedKeys = {};
 
@@ -177,11 +167,9 @@
         currentlyPressedKeys[event.keyCode] = true;
     }
 
-
     function handleKeyUp(event) {
         currentlyPressedKeys[event.keyCode] = false;
     }
-
 
     var pitch = 0;
     var pitchRate = 0;
@@ -225,9 +213,7 @@
         } else {
             speed = 0;
         }
-
     }
-
 
     var worldVertexPositionBuffer = null;
     var worldVertexTextureCoordBuffer = null;
@@ -268,7 +254,6 @@
         document.getElementById("loadingtext").textContent = "";
     }
 
-
     function loadWorld() {
         var request = new XMLHttpRequest();
         request.open("GET", "world.txt");
@@ -279,8 +264,6 @@
         }
         request.send();
     }
-
-
 
     function drawScene() {
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -312,7 +295,6 @@
         gl.drawArrays(gl.TRIANGLES, 0, worldVertexPositionBuffer.numItems);
     }
 
-
     var lastTime = 0;
     // Used to make us "jog" up and down as we move forward.
     var joggingAngle = 0;
@@ -337,15 +319,12 @@
         lastTime = timeNow;
     }
 
-
     function tick() {
         requestAnimFrame(tick);
         handleKeys();
         drawScene();
         animate();
     }
-
-
 
     function webGLStart() {
         var canvas = document.getElementById("lesson10-canvas");
@@ -362,7 +341,6 @@
 
         tick();
     }
-
 </script>
 
 <style type="text/css">
@@ -374,14 +352,10 @@
         color: white;
     }
 </style>
-
-
-
 </head>
 
-
 <body onload="webGLStart();">
-    <a href="http://learningwebgl.com/blog/?p=1067">&lt;&lt; Back to Lesson 10</a><br />
+    <a href="http://learningwebgl.com/blog/?p=1067">&lt;&lt; Back to Lesson 10</a><br/>
 
     <canvas id="lesson10-canvas" style="border: none;" width="500" height="500"></canvas>
 
@@ -395,5 +369,4 @@ look up and down.
     <br/>
     <a href="http://learningwebgl.com/blog/?p=1067">&lt;&lt; Back to Lesson 10</a>
 </body>
-
 </html>
